@@ -1,6 +1,33 @@
+var RatingDefaultConfig = {
+    static: false,
+    title: null,
+    value: 0,
+    values: null,
+    message: "",
+    stars: 5,
+    starColor: null,
+    staredColor: null,
+    roundFunc: "round", // ceil, floor, round
+    half: true,
+    clsRating: "",
+    clsTitle: "",
+    clsStars: "",
+    clsResult: "",
+    onStarClick: Metro.noop,
+    onRatingCreate: Metro.noop
+};
+
+Metro.ratingSetup = function (options) {
+    RatingDefaultConfig = $.extend({}, RatingDefaultConfig, options);
+};
+
+if (typeof window.metroRatingSetup !== undefined) {
+    Metro.ratingSetup(window.metroRatingSetup);
+}
+
 var Rating = {
     init: function( options, elem ) {
-        this.options = $.extend( {}, this.options, options );
+        this.options = $.extend( {}, RatingDefaultConfig, options );
         this.elem  = elem;
         this.element = $(elem);
         this.value = 0;
@@ -13,25 +40,6 @@ var Rating = {
         this._create();
 
         return this;
-    },
-
-    options: {
-        static: false,
-        title: null,
-        value: 0,
-        values: null,
-        message: "",
-        stars: 5,
-        starColor: null,
-        staredColor: null,
-        roundFunc: "round", // ceil, floor, round
-        half: true,
-        clsRating: "",
-        clsTitle: "",
-        clsStars: "",
-        clsResult: "",
-        onStarClick: Metro.noop,
-        onRatingCreate: Metro.noop
     },
 
     _setOptionsFromDOM: function(){
@@ -88,7 +96,8 @@ var Rating = {
         this._createRating();
         this._createEvents();
 
-        Utils.exec(o.onRatingCreate, [element]);
+        Utils.exec(o.onRatingCreate, null, element[0]);
+        element.fire("ratingcreate");
     },
 
     _createRating: function(){
@@ -180,7 +189,11 @@ var Rating = {
             star.prevAll().addClass("on");
             star.nextAll().removeClass("on");
 
-            Utils.exec(o.onStarClick, [value, star, element]);
+            Utils.exec(o.onStarClick, [value, star[0]], element[0]);
+            element.fire("starclick", {
+                value: value,
+                star: star[0]
+            });
         });
     },
 

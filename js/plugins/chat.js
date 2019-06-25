@@ -1,8 +1,43 @@
 var defaultAvatar = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAUABQAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+t+KKPxo/GgA70Yo/Gj8aADFH4VesdC1HUl3WtjcXCf344yV/PGKW+0HUtNXddWNzbp/fkjIX88YoAofhR+FH40fjQAfhR+FH40fjQAUUUUAFepeAPh5D9li1LVYhK8g3Q27j5VXszDuT6f5HA+FtOXVvEWn2rjMcko3j1UckfkDX0MBgYHAoARVCKFUBVHAA6ClZQwKkZBGCDS0UAec+Pvh3BJay6lpUQimjBeW3QYVx3Kjsfbv/PyqvpuvnvxfpqaT4l1C1QbY0lJUDsrfMB+RoAyKKKKACiiigDa8GXq6f4p02eQgIJQpJ7Bvlz+tfQP4V8yDg17P4A8cw65ZxWV5IE1KMbfmP+uA7j39R+NAHaUfhSUUAL+FeA+OL1NQ8WalNGQU83YCO+0Bf6V6b498cQ6BZyWlrIJNSkXaApz5QP8AEff0FeKk5OTyTQAUUUUAH40fjRU1naTX93DbQIXmlYIijuTQBc0Dw/eeI74W1mm49XkbhUHqTXsHhz4eaXoCpI8YvbscmaYZAP8Asr0H8/etHwv4cg8M6XHaxANIfmllxy7dz9PStigA/Gk/GlooA5bxJ8PdL19XkWMWd43PnwjGT/tL0P8AP3rx/X/D954cvjbXibT1SReVceoNfRFZHijw5B4m0uS1lAWQfNFLjlG7H6etAHz5+NH41NeWk1hdzW06FJonKMp7EGoaACvQfhBowudTudRkXK2y7I8j+Nup/Afzrz6vafhRaCDwmkgHM8zufwO3/wBloA7Kiij8KACkpaSgBaSj8KKAPJvi/owttTttRjXC3K7JMf3l6H8R/KvPq9p+K1qJ/CbyEcwTI4P1O3/2avFqAP/Z";
 
+var ChatDefaultConfig = {
+    inputTimeFormat: "%m-%d-%y",
+    timeFormat: "%d %b %l:%M %p",
+    name: "John Doe",
+    avatar: defaultAvatar,
+    welcome: null,
+    title: null,
+    width: "100%",
+    height: "auto",
+    randomColor: false,
+    messages: null,
+    sendButtonTitle: "Send",
+
+    clsChat: "",
+    clsName: "",
+    clsTime: "",
+    clsInput: "",
+    clsSendButton: "",
+    clsMessageLeft: "default",
+    clsMessageRight: "default",
+
+    onMessage: Metro.noop,
+    onSend: Metro.noop,
+    onSendButtonClick: Metro.noop,
+    onChatCreate: Metro.noop
+};
+
+Metro.chatSetup = function (options) {
+    ChatDefaultConfig = $.extend({}, ChatDefaultConfig, options);
+};
+
+if (typeof window.metroChatSetup !== undefined) {
+    Metro.chatSetup(window.metroChatSetup);
+}
+
 var Chat = {
     init: function( options, elem ) {
-        this.options = $.extend( {}, this.options, options );
+        this.options = $.extend( {}, ChatDefaultConfig, options );
         this.elem  = elem;
         this.element = $(elem);
         this.input = null;
@@ -15,33 +50,8 @@ var Chat = {
         return this;
     },
 
-    options: {
-        timeFormat: "%d %b %l:%M %p",
-        name: "John Doe",
-        avatar: defaultAvatar,
-        welcome: null,
-        title: null,
-        width: "100%",
-        height: "auto",
-        randomColor: false,
-        messages: null,
-        sendButtonTitle: "Send",
-
-        clsChat: "",
-        clsName: "",
-        clsTime: "",
-        clsInput: "",
-        clsSendButton: "",
-        clsMessageLeft: "default",
-        clsMessageRight: "default",
-
-        onMessage: Metro.noop,
-        onSend: Metro.noop,
-        onChatCreate: Metro.noop
-    },
-
     _setOptionsFromDOM: function(){
-        var that = this, element = this.element, o = this.options;
+        var element = this.element, o = this.options;
 
         $.each(element.data(), function(key, value){
             if (key in o) {
@@ -55,12 +65,13 @@ var Chat = {
     },
 
     _create: function(){
-        var that = this, element = this.element, o = this.options;
+        var element = this.element, o = this.options;
 
         this._createStructure();
         this._createEvents();
 
         Utils.exec(o.onChatCreate, [element]);
+        element.fire("chatcreate");
     },
 
     _createStructure: function(){
@@ -85,7 +96,8 @@ var Chat = {
             $("<div>").addClass("title").html(o.title).appendTo(element);
         }
 
-        messages = $("<div>").addClass("messages").appendTo(element);
+        messages = $("<div>").addClass("messages");
+        messages.appendTo(element);
         messageInput = $("<div>").addClass("message-input").appendTo(element);
         input = $("<input type='text'>");
         input.appendTo(messageInput);
@@ -97,7 +109,7 @@ var Chat = {
         if (o.welcome) {
             this.add({
                 text: o.welcome,
-                time: (new Date()).format(o.timeFormat),
+                time: (new Date()),
                 position: "left",
                 name: "Welcome",
                 avatar: defaultAvatar
@@ -129,10 +141,13 @@ var Chat = {
                 avatar: o.avatar,
                 text: msg,
                 position: "right",
-                time: (new Date()).format(o.timeFormat)
+                time: (new Date())
             };
             that.add(m);
             Utils.exec(o.onSend, [m], element[0]);
+            element.fire("send", {
+                msg: m
+            });
             input.val("");
         };
 
@@ -151,10 +166,13 @@ var Chat = {
         var that = this, element = this.element, o = this.options;
         var index, message, sender, time, item, avatar, text;
         var messages = element.find(".messages");
+        var messageDate;
+
+        messageDate = typeof msg.time === 'string' ? msg.time.toDate(o.inputTimeFormat) : msg.time;
 
         message = $("<div>").addClass("message").addClass(msg.position).appendTo(messages);
         sender = $("<div>").addClass("message-sender").addClass(o.clsName).html(msg.name).appendTo(message);
-        time = $("<div>").addClass("message-time").addClass(o.clsTime).html((new Date(msg.time)).format(o.timeFormat)).appendTo(message);
+        time = $("<div>").addClass("message-time").addClass(o.clsTime).html(messageDate.format(o.timeFormat)).appendTo(message);
         item = $("<div>").addClass("message-item").appendTo(message);
         avatar = $("<img>").attr("src", msg.avatar).addClass("message-avatar").appendTo(item);
         text = $("<div>").addClass("message-text").html(msg.text).appendTo(item);
@@ -175,7 +193,26 @@ var Chat = {
             }
         }
 
-        Utils.exec(o.onMessage, [msg], message[0]);
+        Utils.exec(o.onMessage, [msg, {
+            message: message,
+            sender: sender,
+            time: time,
+            item: item,
+            avatar: avatar,
+            text: text
+        }], message[0]);
+
+        element.fire("message", {
+            msg: msg,
+            el: {
+                message: message,
+                sender: sender,
+                time: time,
+                item: item,
+                avatar: avatar,
+                text: text
+            }
+        });
 
         setImmediate(function(){
             element.fire("onmessage", {
@@ -194,7 +231,7 @@ var Chat = {
     },
 
     addMessages: function(messages){
-        var that = this, element = this.element, o = this.options;
+        var that = this;
 
         if (Utils.isValue(messages) && typeof messages === "string") {
             messages = Utils.isObject(messages);

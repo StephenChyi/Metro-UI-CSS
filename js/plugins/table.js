@@ -1,6 +1,134 @@
+var TableDefaultConfig = {
+    templateBeginToken: "<%",
+    templateEndToken: "%>",
+    paginationDistance: 5,
+
+    locale: METRO_LOCALE,
+
+    horizontalScroll: false,
+    horizontalScrollStop: null,
+    check: false,
+    checkType: "checkbox",
+    checkStyle: 1,
+    checkColIndex: 0,
+    checkName: null,
+    checkStoreKey: "TABLE:$1:KEYS",
+    rownum: false,
+    rownumTitle: "#",
+
+    filters: null,
+    filtersOperator: "and",
+
+    source: null,
+
+    searchMinLength: 1,
+    searchThreshold: 500,
+    searchFields: null,
+
+    showRowsSteps: true,
+    showSearch: true,
+    showTableInfo: true,
+    showPagination: true,
+    paginationShortMode: true,
+    showActivity: true,
+    muteTable: true,
+
+    rows: 10,
+    rowsSteps: "10,25,50,100",
+
+    staticView: false,
+    viewSaveMode: "client",
+    viewSavePath: "TABLE:$1:OPTIONS",
+
+    sortDir: "asc",
+    decimalSeparator: ".",
+    thousandSeparator: ",",
+
+    tableRowsCountTitle: "Show entries:",
+    tableSearchTitle: "Search:",
+    tableInfoTitle: "Showing $1 to $2 of $3 entries",
+    paginationPrevTitle: "Prev",
+    paginationNextTitle: "Next",
+    allRecordsTitle: "All",
+    inspectorTitle: "Inspector",
+
+    activityType: "cycle",
+    activityStyle: "color",
+    activityTimeout: 100,
+
+    searchWrapper: null,
+    rowsWrapper: null,
+    infoWrapper: null,
+    paginationWrapper: null,
+
+    cellWrapper: true,
+
+    clsComponent: "",
+    clsTableContainer: "",
+    clsTable: "",
+
+    clsHead: "",
+    clsHeadRow: "",
+    clsHeadCell: "",
+
+    clsBody: "",
+    clsBodyRow: "",
+    clsBodyCell: "",
+    clsCellWrapper: "",
+
+    clsFooter: "",
+    clsFooterRow: "",
+    clsFooterCell: "",
+
+    clsTableTop: "",
+    clsRowsCount: "",
+    clsSearch: "",
+
+    clsTableBottom: "",
+    clsTableInfo: "",
+    clsTablePagination: "",
+
+    clsPagination: "",
+
+    clsEvenRow: "",
+    clsOddRow: "",
+    clsRow: "",
+
+    onDraw: Metro.noop,
+    onDrawRow: Metro.noop,
+    onDrawCell: Metro.noop,
+    onAppendRow: Metro.noop,
+    onAppendCell: Metro.noop,
+    onSortStart: Metro.noop,
+    onSortStop: Metro.noop,
+    onSortItemSwitch: Metro.noop,
+    onSearch: Metro.noop,
+    onRowsCountChange: Metro.noop,
+    onDataLoad: Metro.noop,
+    onDataLoadError: Metro.noop,
+    onDataLoaded: Metro.noop,
+    onFilterRowAccepted: Metro.noop,
+    onFilterRowDeclined: Metro.noop,
+    onCheckClick: Metro.noop,
+    onCheckClickAll: Metro.noop,
+    onCheckDraw: Metro.noop,
+    onViewSave: Metro.noop,
+    onViewGet: Metro.noop,
+    onViewCreated: Metro.noop,
+    onTableCreate: Metro.noop
+};
+
+Metro.tableSetup = function(options){
+    TableDefaultConfig = $.extend({}, TableDefaultConfig, options);
+};
+
+if (typeof window.metroTableSetup !== undefined) {
+    Metro.tableSetup(window.metroTableSetup);
+}
+
 var Table = {
     init: function( options, elem ) {
-        this.options = $.extend( {}, this.options, options );
+        this.options = $.extend( {}, TableDefaultConfig, options );
         this.elem  = elem;
         this.element = $(elem);
         this.currentPage = 1;
@@ -44,122 +172,6 @@ var Table = {
         return this;
     },
 
-    options: {
-        locale: METRO_LOCALE,
-
-        horizontalScroll: false,
-        horizontalScrollStop: null,
-        check: false,
-        checkType: "checkbox",
-        checkStyle: 1,
-        checkColIndex: 0,
-        checkName: null,
-        checkStoreKey: "TABLE:$1:KEYS",
-        rownum: false,
-        rownumTitle: "#",
-
-        filters: null,
-        filtersOperator: "and",
-
-        source: null,
-
-        searchMinLength: 1,
-        searchThreshold: 500,
-        searchFields: null,
-
-        showRowsSteps: true,
-        showSearch: true,
-        showTableInfo: true,
-        showPagination: true,
-        paginationShortMode: true,
-        showActivity: true,
-        muteTable: true,
-
-        rows: 10,
-        rowsSteps: "10,25,50,100",
-
-        staticView: false,
-        viewSaveMode: "client",
-        viewSavePath: "TABLE:$1:OPTIONS",
-
-        sortDir: "asc",
-        decimalSeparator: ".",
-        thousandSeparator: ",",
-
-        tableRowsCountTitle: "Show entries:",
-        tableSearchTitle: "Search:",
-        tableInfoTitle: "Showing $1 to $2 of $3 entries",
-        paginationPrevTitle: "Prev",
-        paginationNextTitle: "Next",
-        allRecordsTitle: "All",
-        inspectorTitle: "Inspector",
-
-        activityType: "cycle",
-        activityStyle: "color",
-        activityTimeout: 100,
-
-        searchWrapper: null,
-        rowsWrapper: null,
-        infoWrapper: null,
-        paginationWrapper: null,
-
-        cellWrapper: true,
-
-        clsComponent: "",
-        clsTableContainer: "",
-        clsTable: "",
-
-        clsHead: "",
-        clsHeadRow: "",
-        clsHeadCell: "",
-
-        clsBody: "",
-        clsBodyRow: "",
-        clsBodyCell: "",
-        clsCellWrapper: "",
-
-        clsFooter: "",
-        clsFooterRow: "",
-        clsFooterCell: "",
-
-        clsTableTop: "",
-        clsRowsCount: "",
-        clsSearch: "",
-
-        clsTableBottom: "",
-        clsTableInfo: "",
-        clsTablePagination: "",
-
-        clsPagination: "",
-
-        clsEvenRow: "",
-        clsOddRow: "",
-        clsRow: "",
-
-        onDraw: Metro.noop,
-        onDrawRow: Metro.noop,
-        onDrawCell: Metro.noop,
-        onAppendRow: Metro.noop,
-        onAppendCell: Metro.noop,
-        onSortStart: Metro.noop,
-        onSortStop: Metro.noop,
-        onSortItemSwitch: Metro.noop,
-        onSearch: Metro.noop,
-        onRowsCountChange: Metro.noop,
-        onDataLoad: Metro.noop,
-        onDataLoadError: Metro.noop,
-        onDataLoaded: Metro.noop,
-        onFilterRowAccepted: Metro.noop,
-        onFilterRowDeclined: Metro.noop,
-        onCheckClick: Metro.noop,
-        onCheckClickAll: Metro.noop,
-        onCheckDraw: Metro.noop,
-        onViewSave: Metro.noop,
-        onViewGet: Metro.noop,
-        onViewCreated: Metro.noop,
-        onTableCreate: Metro.noop
-    },
-
     _setOptionsFromDOM: function(){
         var element = this.element, o = this.options;
 
@@ -192,15 +204,26 @@ var Table = {
 
         if (o.source !== null) {
             Utils.exec(o.onDataLoad, [o.source], element[0]);
+            element.fire("dataload", {
+                source: o.source
+            });
 
             $.get(o.source, function(data){
                 if (typeof data !== "object") {
                     throw new Error("Data for table is not a object");
                 }
-                that._build(data);
                 Utils.exec(o.onDataLoaded, [o.source, data], element[0]);
+                element.fire("dataloaded", {
+                    source: o.source,
+                    data: data
+                });
+                that._build(data);
             }).fail(function( jqXHR, textStatus, errorThrown) {
                 Utils.exec(o.onDataLoadError, [o.source, jqXHR, textStatus, errorThrown], element[0]);
+                element.fire("dataloaderror", {
+                    source: o.source,
+                    xhr: jqXHR
+                })
             });
         } else {
             that._build();
@@ -243,6 +266,10 @@ var Table = {
             if (Utils.isValue(view) && Utils.objectLength(view) === Utils.objectLength(this.view)) {
                 this.view = view;
                 Utils.exec(o.onViewGet, [view], element[0]);
+                element.fire("viewget", {
+                    source: "client",
+                    view: view
+                });
             }
             this._final();
         } else {
@@ -255,6 +282,10 @@ var Table = {
                     if (Utils.isValue(view) && Utils.objectLength(view) === Utils.objectLength(that.view)) {
                         that.view = view;
                         Utils.exec(o.onViewGet, [view], element[0]);
+                        element.fire("viewget", {
+                            source: "server",
+                            view: view
+                        });
                     }
                     that._final();
                 }
@@ -277,6 +308,8 @@ var Table = {
         this._createEvents();
 
         Utils.exec(o.onTableCreate, [element], element[0]);
+
+        element.fire("tablecreate");
     },
 
     _service: function(){
@@ -311,7 +344,7 @@ var Table = {
     },
 
     _createView: function(){
-        var view, o = this.options;
+        var view, element = this.element, o = this.options;
 
         view = {};
 
@@ -329,6 +362,9 @@ var Table = {
         });
 
         Utils.exec(o.onViewCreated, [view], view);
+        element.fire("viewcreated", {
+            view: view
+        });
         return view;
     },
 
@@ -442,7 +478,9 @@ var Table = {
                 required: Utils.isValue(item.data("required")) ? JSON.parse(item.data("required")) === true  : false,
                 field: Utils.isValue(item.data("field")) ? item.data("field") : "input",
                 fieldType: Utils.isValue(item.data("field-type")) ? item.data("field-type") : "text",
-                validator: Utils.isValue(item.data("validator")) ? item.data("validator") : null
+                validator: Utils.isValue(item.data("validator")) ? item.data("validator") : null,
+
+                template: Utils.isValue(item.data("template")) ? item.data("template") : null
             };
             that.heads.push(head_item);
         });
@@ -678,7 +716,10 @@ var Table = {
                 o.rows = val;
                 that.currentPage = 1;
                 that._draw();
-                Utils.exec(o.onRowsCountChange, [val], element[0])
+                Utils.exec(o.onRowsCountChange, [val], element[0]);
+                element.fire("rowscountchange", {
+                    val: val
+                });
             }
         });
 
@@ -876,6 +917,10 @@ var Table = {
             storage.setItem(store_key, data);
 
             Utils.exec(o.onCheckClick, [status], this);
+            element.fire("checkclick", {
+                check: this,
+                status: status
+            });
         });
 
         element.on(Metro.events.click, ".table-service-check-all input", function(){
@@ -897,6 +942,10 @@ var Table = {
             that._draw();
 
             Utils.exec(o.onCheckClickAll, [status], this);
+            element.fire("checkclickall", {
+                check: this,
+                status: status
+            });
         });
 
         var _search = function(){
@@ -1104,6 +1153,11 @@ var Table = {
         if (o.viewSaveMode.toLowerCase() === "client") {
             Metro.storage.setItem(o.viewSavePath.replace("$1", id), view);
             Utils.exec(o.onViewSave, [o.viewSavePath, view], element[0]);
+            element.fire("viewsave", {
+                target: "client",
+                path: o.viewSavePath,
+                view: view
+            });
         } else {
             $.post(
                 o.viewSavePath,
@@ -1113,6 +1167,11 @@ var Table = {
                 },
                 function(data, status, xhr){
                     Utils.exec(o.onViewSave, [o.viewSavePath, view, data, status, xhr], element[0]);
+                    element.fire("viewsave", {
+                        target: "server",
+                        path: o.viewSavePath,
+                        view: view
+                    });
                 }
             );
         }
@@ -1144,92 +1203,19 @@ var Table = {
     },
 
     _paging: function(length){
-        var that = this, element = this.element, o = this.options;
+        var element = this.element, o = this.options;
         var component = element.closest(".table-component");
-        var pagination_wrapper = Utils.isValue(this.wrapperPagination) ? this.wrapperPagination : component.find(".table-pagination");
-        var i, prev, next;
-        var shortDistance = 5;
-        var pagination;
-
-        pagination_wrapper.html("");
-
-        pagination = $("<ul>").addClass("pagination").addClass(o.clsPagination).appendTo(pagination_wrapper);
-
-        if (this.items.length === 0) {
-            return ;
-        }
-
-        if (o.rows === -1) {
-            return ;
-        }
-
-        this.pagesCount = Math.ceil(length / o.rows);
-
-        var add_item = function(item_title, item_type, data){
-            var li, a;
-
-            li = $("<li>").addClass("page-item").addClass(item_type);
-            a  = $("<a>").addClass("page-link").html(item_title);
-            a.data("page", data);
-            a.appendTo(li);
-
-            return li;
-        };
-
-        prev = add_item(o.paginationPrevTitle, "service prev-page", "prev");
-        pagination.append(prev);
-
-        pagination.append(add_item(1, that.currentPage === 1 ? "active" : "", 1));
-
-        if (o.paginationShortMode !== true || this.pagesCount <= 7) {
-            for (i = 2; i < this.pagesCount; i++) {
-                pagination.append(add_item(i, i === that.currentPage ? "active" : "", i));
-            }
-        } else {
-            if (that.currentPage < shortDistance) {
-                for (i = 2; i <= shortDistance; i++) {
-                    pagination.append(add_item(i, i === that.currentPage ? "active" : "", i));
-                }
-
-                if (this.pagesCount > shortDistance) {
-                    pagination.append(add_item("...", "no-link", null));
-                }
-            } else if (that.currentPage <= that.pagesCount && that.currentPage > that.pagesCount - shortDistance + 1) {
-                if (this.pagesCount > shortDistance) {
-                    pagination.append(add_item("...", "no-link", null));
-                }
-
-                for (i = that.pagesCount - shortDistance + 1; i < that.pagesCount; i++) {
-                    pagination.append(add_item(i, i === that.currentPage ? "active" : "", i));
-                }
-            } else {
-                pagination.append(add_item("...", "no-link", null));
-
-                pagination.append(add_item(that.currentPage - 1, "", that.currentPage - 1));
-                pagination.append(add_item(that.currentPage, "active", that.currentPage));
-                pagination.append(add_item(that.currentPage + 1, "", that.currentPage + 1));
-
-                pagination.append(add_item("...", "no-link", null));
-            }
-        }
-
-        if (that.pagesCount > 1 || that.currentPage < that.pagesCount) pagination.append(add_item(that.pagesCount, that.currentPage === that.pagesCount ? "active" : "", that.pagesCount));
-
-        next = add_item(o.paginationNextTitle, "service next-page", "next");
-        pagination.append(next);
-
-        if (this.currentPage === 1) {
-            prev.addClass("disabled");
-        }
-
-        if (this.currentPage === this.pagesCount) {
-            next.addClass("disabled");
-        }
-
-        if (this.filteredItems.length === 0) {
-            pagination.addClass("disabled");
-            pagination.children().addClass("disabled");
-        }
+        this.pagesCount = Math.ceil(length / o.rows); // Костыль
+        createPagination({
+            length: length,
+            rows: o.rows,
+            current: this.currentPage,
+            target: Utils.isValue(this.wrapperPagination) ? this.wrapperPagination : component.find(".table-pagination"),
+            claPagination: o.clsPagination,
+            prevTitle: o.paginationPrevTitle,
+            nextTitle: o.paginationNextTitle,
+            distance: o.paginationShortMode === true ? o.paginationDistance : 0
+        });
     },
 
     _filter: function(){
@@ -1274,8 +1260,14 @@ var Table = {
 
                 if (result) {
                     Utils.exec(o.onFilterRowAccepted, [row], element[0]);
+                    element.fire("filterrowaccepted", {
+                        row: row
+                    });
                 } else {
                     Utils.exec(o.onFilterRowDeclined, [row], element[0]);
+                    element.fire("filterrowdeclined", {
+                        row: row
+                    });
                 }
 
                 return result;
@@ -1286,6 +1278,10 @@ var Table = {
         }
 
         Utils.exec(o.onSearch, [that.searchString, items], element[0]);
+        element.fire("search", {
+            search: that.searchString,
+            items: items
+        });
 
         this.filteredItems = items;
 
@@ -1337,6 +1333,9 @@ var Table = {
 
             check.addClass("table-service-check");
             Utils.exec(o.onCheckDraw, [check], check[0]);
+            element.fire("checkdraw", {
+                check: check
+            });
             check.appendTo(td);
             if (that.service[1].clsColumn !== undefined) {
                 td.addClass(that.service[1].clsColumn);
@@ -1348,11 +1347,20 @@ var Table = {
             }
 
             $.each(cells, function(cell_index){
+                var val = this;
+
+                if (Utils.isValue(that.heads[cell_index].template)) {
+                    val = TemplateEngine(that.heads[cell_index].template, {cellValue: val}, {
+                        beginToken: o.templateBeginToken,
+                        endToken: o.templateEndToken
+                    })
+                }
+
                 if (o.cellWrapper === true) {
                     td = $("<td>");
-                    $("<div>").addClass("cell-wrapper").addClass(o.clsCellWrapper).html(this).appendTo(td);
+                    $("<div>").addClass("cell-wrapper").addClass(o.clsCellWrapper).html(val).appendTo(td);
                 } else {
-                    td = $("<td>").html(this);
+                    td = $("<td>").html(val);
                 }
                 td.addClass(o.clsBodyCell);
                 if (Utils.isValue(that.heads[cell_index].clsColumn)) {
@@ -1370,19 +1378,40 @@ var Table = {
                 td.data('original',this);
 
                 tds[view[cell_index]['index-view']] = td;
-                Utils.exec(o.onDrawCell, [td, this, cell_index, that.heads[cell_index], cells], td[0]);
+                Utils.exec(o.onDrawCell, [td, val, cell_index, that.heads[cell_index], cells], td[0]);
+                element.fire("drawcell", {
+                    td: td,
+                    val: val,
+                    cellIndex: cell_index,
+                    head: that.heads[cell_index],
+                    items: cells
+                });
             });
 
             for (j = 0; j < cells.length; j++){
                 tds[j].appendTo(tr);
-                Utils.exec(o.onAppendCell, [tds[j], tr, j, element], tds[j][0])
+                Utils.exec(o.onAppendCell, [tds[j], tr, j, element], tds[j][0]);
+                element.fire("appendcell", {
+                    td: tds[j],
+                    tr: tr,
+                    index: j
+                })
             }
 
             Utils.exec(o.onDrawRow, [tr, that.view, that.heads, cells], tr[0]);
+            element.fire("drawrow", {
+                tr: tr,
+                view: that.view,
+                heads: that.heads,
+                items: cells
+            });
 
             tr.addClass(o.clsRow).addClass(is_even_row ? o.clsEvenRow : o.clsOddRow).appendTo(body);
 
             Utils.exec(o.onAppendRow, [tr, element], tr[0]);
+            element.fire("appendrow", {
+                tr: tr
+            });
         }
 
         this._info(start + 1, stop + 1, items.length);
@@ -1391,6 +1420,8 @@ var Table = {
         if (this.activity) this.activity.hide();
 
         Utils.exec(o.onDraw, [element], element[0]);
+
+        element.fire("draw", element[0]);
 
         if (cb !== undefined) {
             Utils.exec(cb, [element], element[0])
@@ -1514,6 +1545,7 @@ var Table = {
         }
 
         Utils.exec(o.onSortStart, [this.items], element[0]);
+        element.fire("sortstart", this.items);
 
         this.items.sort(function(a, b){
             var c1 = that._getItemContent(a);
@@ -1529,12 +1561,18 @@ var Table = {
 
             if (result !== 0) {
                 Utils.exec(o.onSortItemSwitch, [a, b, result], element[0]);
+                element.fire("sortitemswitch", {
+                    a: a,
+                    b: b,
+                    result: result
+                })
             }
 
             return result;
         });
 
         Utils.exec(o.onSortStop, [this.items], element[0]);
+        element.fire("sortstop", this.items);
 
         return this;
     },
@@ -1632,6 +1670,9 @@ var Table = {
             o.source = source;
 
             Utils.exec(o.onDataLoad, [o.source], element[0]);
+            element.fire("dataload", {
+                source: o.source
+            });
 
             $.get(o.source, function(data){
 
@@ -1639,14 +1680,20 @@ var Table = {
                 that.heads = [];
                 that.foots = [];
 
-                that._createItemsFromJSON(data);
-
-                that._rebuild(review);
-
                 Utils.exec(o.onDataLoaded, [o.source, data], element[0]);
+                element.fire("dataloaded", {
+                    source: o.source,
+                    data: data
+                });
+
+                that._createItemsFromJSON(data);
+                that._rebuild(review);
             }).fail(function( jqXHR, textStatus, errorThrown) {
                 Utils.exec(o.onDataLoadError, [o.source, jqXHR, textStatus, errorThrown], element[0]);
-                console.log(textStatus); console.log(jqXHR); console.log(errorThrown);
+                element.fire("dataloaderror", {
+                    source: o.source,
+                    xhr: jqXHR
+                })
             });
         }
     },
@@ -1927,9 +1974,10 @@ var Table = {
             }
         }
 
-        switch (to) {
-            default: Export.tableToCSV(table, filename, options);
-        }
+        // switch (to) {
+        //     default: Export.tableToCSV(table, filename, options);
+        // }
+        Export.tableToCSV(table, filename, options);
         table.remove();
     },
 

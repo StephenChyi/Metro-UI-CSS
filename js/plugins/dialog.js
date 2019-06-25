@@ -1,8 +1,51 @@
+var DialogDefaultConfig = {
+    closeButton: false,
+    leaveOverlayOnClose: false,
+    toTop: false,
+    toBottom: false,
+    locale: METRO_LOCALE,
+    title: "",
+    content: "",
+    actions: {},
+    actionsAlign: "right",
+    defaultAction: true,
+    overlay: true,
+    overlayColor: '#000000',
+    overlayAlpha: .5,
+    overlayClickClose: false,
+    width: '480',
+    height: 'auto',
+    shadow: true,
+    closeAction: true,
+    clsDialog: "",
+    clsTitle: "",
+    clsContent: "",
+    clsAction: "",
+    clsDefaultAction: "",
+    clsOverlay: "",
+    autoHide: 0,
+    removeOnClose: false,
+    show: false,
+    onShow: Metro.noop,
+    onHide: Metro.noop,
+    onOpen: Metro.noop,
+    onClose: Metro.noop,
+    onDialogCreate: Metro.noop
+};
+
+Metro.dialogSetup = function (options) {
+    DialogDefaultConfig = $.extend({}, DialogDefaultConfig, options);
+};
+
+if (typeof window.metroDialogSetup !== undefined) {
+    Metro.dialogSetup(window.metroDialogSetup);
+}
+
 var Dialog = {
     _counter: 0,
 
     init: function( options, elem ) {
-        this.options = $.extend( {}, this.options, options );
+        this.options = $.extend( {}, DialogDefaultConfig, options );
         this.elem  = elem;
         this.element = $(elem);
         this.interval = null;
@@ -12,41 +55,6 @@ var Dialog = {
         this._create();
 
         return this;
-    },
-
-    options: {
-        closeButton: false,
-        leaveOverlayOnClose: false,
-        toTop: false,
-        toBottom: false,
-        locale: METRO_LOCALE,
-        title: "",
-        content: "",
-        actions: {},
-        actionsAlign: "right",
-        defaultAction: true,
-        overlay: true,
-        overlayColor: '#000000',
-        overlayAlpha: .5,
-        overlayClickClose: false,
-        width: '480',
-        height: 'auto',
-        shadow: true,
-        closeAction: true,
-        clsDialog: "",
-        clsTitle: "",
-        clsContent: "",
-        clsAction: "",
-        clsDefaultAction: "",
-        clsOverlay: "",
-        autoHide: 0,
-        removeOnClose: false,
-        show: false,
-        onShow: Metro.noop,
-        onHide: Metro.noop,
-        onOpen: Metro.noop,
-        onClose: Metro.noop,
-        onDialogCreate: Metro.noop
     },
 
     _setOptionsFromDOM: function(){
@@ -105,7 +113,7 @@ var Dialog = {
                 button.appendTo(buttons);
             }
 
-            $.each(o.actions, function(){
+            if (Utils.isObject(o.actions)) $.each(Utils.isObject(o.actions), function(){
                 var item = this;
                 button = $("<button>").addClass("button").addClass(item.cls).html(item.caption);
                 if (item.onclick !== undefined) button.on(Metro.events.click, function(){
@@ -159,6 +167,7 @@ var Dialog = {
         });
 
         Utils.exec(this.options.onDialogCreate, [this.element]);
+        element.fire("dialogcreate");
     },
 
     _overlay: function(){
@@ -190,6 +199,7 @@ var Dialog = {
                 top: "100%"
             });
             Utils.exec(o.onHide, [that], element[0]);
+            element.fire("hide");
             Utils.callback(callback);
         }, timeout);
     },
@@ -201,6 +211,7 @@ var Dialog = {
             visibility: "visible"
         });
         Utils.exec(o.onShow, [that], element[0]);
+        element.fire("show");
         Utils.callback(callback);
     },
 
@@ -238,11 +249,11 @@ var Dialog = {
             content.appendTo(element);
         }
 
-        if (!Utils.isJQueryObject(c) && Utils.isFunc(c)) {
+        if (!Utils.isQ(c) && Utils.isFunc(c)) {
             c = Utils.exec(c);
         }
 
-        if (Utils.isJQueryObject(c)) {
+        if (Utils.isQ(c)) {
             c.appendTo(content);
         } else {
             content.html(c);
@@ -269,6 +280,7 @@ var Dialog = {
         this.hide(function(){
             element.data("open", false);
             Utils.exec(o.onClose, [element], element[0]);
+            element.fire("close");
             if (o.removeOnClose === true) {
                 element.remove();
             }
@@ -289,6 +301,7 @@ var Dialog = {
 
         this.show(function(){
             Utils.exec(o.onOpen, [element], element[0]);
+            element.fire("open");
             element.data("open", true);
             if (parseInt(o.autoHide) > 0) {
                 setTimeout(function(){

@@ -1,6 +1,23 @@
+var NavigationViewDefaultConfig = {
+    compact: "md",
+    expanded: "lg",
+    toggle: null,
+    activeState: false,
+    onMenuItemClick: Metro.noop,
+    onNavViewCreate: Metro.noop
+};
+
+Metro.navigationViewSetup = function (options) {
+    NavigationViewDefaultConfig = $.extend({}, NavigationViewDefaultConfig, options);
+};
+
+if (typeof window.metroNavigationViewSetup !== undefined) {
+    Metro.navigationViewSetup(window.metroNavigationSetup);
+}
+
 var NavigationView = {
     init: function( options, elem ) {
-        this.options = $.extend( {}, this.options, options );
+        this.options = $.extend( {}, NavigationViewDefaultConfig, options );
         this.elem  = elem;
         this.element = $(elem);
         this.pane = null;
@@ -11,15 +28,6 @@ var NavigationView = {
         this._create();
 
         return this;
-    },
-
-    options: {
-        compact: "md",
-        expanded: "lg",
-        toggle: null,
-        activeState: false,
-        onMenuItemClick: Metro.noop,
-        onNavViewCreate: Metro.noop
     },
 
     _setOptionsFromDOM: function(){
@@ -42,7 +50,8 @@ var NavigationView = {
         this._createView();
         this._createEvents();
 
-        Utils.exec(o.onNavViewCreate, [element]);
+        Utils.exec(o.onNavViewCreate, null, element[0]);
+        element.fire("navviewcreate");
     },
 
     _calcMenuHeight: function(){
@@ -113,8 +122,11 @@ var NavigationView = {
             }
         });
 
-        element.on(Metro.events.click, ".navview-menu li > a", function(e){
+        element.on(Metro.events.click, ".navview-menu li > a", function(){
             Utils.exec(o.onMenuItemClick, null, this);
+            element.fire("menuitemclick", {
+                item: this
+            });
         });
 
         if (this.paneToggle !== null) {

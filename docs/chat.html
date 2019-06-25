@@ -39,7 +39,7 @@
 <div class="container-fluid">
 
     <div class="row flex-xl-nowrap">
-        <div class="cell-md-3 cell-xl-2 pr-0 border-right bd-light" id="sidenav" data-role="htmlcontainer" data-html-source="sidenav.html" data-insert-mode="replace"  data-on-load="initDocSearchEngine()"></div>
+        <div class="cell-md-3 cell-xl-2 pr-0 border-right bd-light" id="sidenav" data-role="htmlcontainer" data-html-source="sidenav.html" data-insert-mode="replace"  data-on-html-load="initDocSearchEngine()"></div>
 
             <div class="d-none d-block-xl cell-xl-2 order-2 border-left bd-light toc-wrapper">
                 <h5>Table of contents</h5>
@@ -119,6 +119,12 @@
                         <td><code>data-time-format</code></td>
                         <td>%d %b %l:%M %p</td>
                         <td>Message time format. More about <a href="dateformat.html">date-time formats</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>inputTimeFormat</code></td>
+                        <td><code>data-input-time-format</code></td>
+                        <td>%m-%d-%y</td>
+                        <td>Message input time format. More about <a href="dateformat.html">date-time formats</a></td>
                     </tr>
                     <tr>
                         <td><code>name</code></td>
@@ -379,7 +385,7 @@
         setTimeout(function(){
             var _m = {
                 name: opponent.name,
-                time: (new Date()).format("%d %b %l:%M %p"), //"23 Jan 2:00 pm",
+                time: (new Date()),
                 avatar: opponent.avatar,
                 text: messages[Metro.utils.random(0, messages.length - 1)],
                 position: "left"

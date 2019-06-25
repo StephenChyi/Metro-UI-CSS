@@ -1,3 +1,73 @@
+### 4.2.45
++ [x] Calendar picker: fix initial value for i18n
++ [x] Typography: set `line-height: 1.5` for `p` 
++ [x] Examples: fix desktop demo
++ [x] Examples: fix start screen demo
+
+### 4.2.44
++ [x] Calendar: fix methods `setMaxDate`, `setMinDate`, issue #1374
++ [x] Datepicker: fix offset for timezones, issue #1372
++ [x] Datepicker: fix `val()` method 
++ [x] Notify system: fix minor bug for creating notify after setup
+
+### 4.2.43
++ [x] Inputs: add class `.input-small` for using with `input`, `select`, `spinner`, `tag-input`, `keypad`, `file` , issue #1245
++ [x] Events: upd docs for subscribing events with `$.on` and `addEventListener()`
++ [x] Panel: new method `customButtons()` for add custom buttons at runtime
++ [x] Table: add `margin-top: 1rem` for class `.table`
++ [x] Lists: add `margin-top: 1rem` for `ul`, `ol`, `dl`
++ [x] Hotkey: full refactoring
++ [x] Datepicker: add attribute `data-input-format`
++ [x] Datepicker: fix hours timezone offset
++ [x] Datepicker: now you can use attribute `value` to setup component date
++ [x] Pickers: change default scroll speed factor to `4` 
++ [x] Window: fix methods `setContent`, `setTitle`, `setIcon`, `changePlace`
++ [x] Utils: rename method `isJQueryObject` to `isJQuery`
++ [x] Utils: add methods `isM4Q`, `isQ`. Method `isQ` return one of `isJQuery` or `isM4Q`
++ [x] Streamer: fix scrolling with `apple magic mouse` and `firefox`
++ [x] Streamer: fix scroll position for `events-area` when source changed
++ [x] TreeView: fix confused calls `expandNode` and `collapseNode` events
++ [x] Dialog: add attribute `data-actions` for predefined dialog
++ [x] DatePicker: fix scroll event handler
++ [x] TimePicker: fix scroll event handler
++ [x] Tabs material: add event `data-on-tabs-scroll`
++ [x] ScrollEvents: plugin for `scrollStart`, `scrollStop` events was removed
++ [x] Mousewheel: plugin was removed
+ 
+### 4.2.42
++ [x] General: improved components initialization
++ [x] Hotkeys: now you can add or change `hotkey` at runtime
++ [x] Select: fix cyclic error when `Uncaught ReferenceError: function is not defined` for `onchange` event
++ [x] Card: add class `flex-card` to create card in flex model
++ [x] ListView: fix works methods with jQuery object and\or HTMLElement
++ [x] Streamer: add event `data-on-events-scroll` 
++ [x] Streamer: fix method `source` 
++ [x] Streamer: rename method `data` to `dataSet` 
++ [x] TreeView: fix methods for add nodes, issue #1150
+
+### 4.2.41
++ [x] List: add event `data-on-data-load-error`
++ [x] List: add item template with property `template`
++ [x] Table: add item template with property `template` and value wrapper `this.cellValue`
++ [x] Pagination: add function `Metro.pagination`
++ [x] Templates: now you can change `begin` and `end` template symbols with third argument `{beginToken, endToken}`
++ [x] Html container: add attributes `data-method`, `data-request-data`
++ [x] Html container: change name of events to `data-on-html-load`, `data-on-html-load-fail`, `data-on-html-load-done`
++ [x] Typography: change `line-height` for `p`, `.text-leader`, `.text-leader2` to `1.2` 
++ [x] Charm: add event `data-on-toggle`.
++ [x] Chat: fix error for time manipulation, issue #1355
++ [x] Master: add events `data-on-next-page`, `data-on-prev-page`
++ [x] Events extensions: Now you can subscribe to all table events with `$.on()` or `addEventListener()`
++ [x] Wizard: add events `data-on-next-page`, `data-on-prev-page`, `data-on-first-page`, `data-on-last-page`, `data-on-finish-page`
++ [x] Global setup: add using global object `metro{ComponentName}Setup` to set up all components on the page with own global options set.
++ [x] Resizable: fix toggle `canResize` property   
++ [x] Calendar picker: fix width for calendar wide
++ [x] Slider: change events to `startAll`, `moveAll`, `stopAll`
++ [x] Streamer: add events `data-on-data-load`, `data-on-data-loaded`, `data-on-data-load-error` 
++ [x] Streamer: fix methods `changeSource`, `changeData`
++ [x] Streamer: add property `row` for event
++ [x] Streamer: add property `html` for event with custom html
+
 ### 4.2.40
 + [x] Chat: new component
 + [x] Boxes: add new boxes `skill-box`, `social-box`, `more-info-box`
