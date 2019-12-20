@@ -1,14 +1,187 @@
+### 4.3.4
+
+##### M4Q
++ [x] M4Q: upd to 1.0.4
++ [x] M4Q Manipulation: optimise `append`, `prepend` to one definition for IE
++ [x] M4Q Script: add `$.script`, `$.fn.script` to execute scripts from element or create script object
++ [x] M4Q Manipulation: `$.fn.append`, `$.fn.prepend` now support script tag processing
++ [x] M4Q Clone: now support cloning `data` if second argument `withData`is `true` - `$(el).clone(true, true)`
++ [x] M4Q Events: now you can define event name with `hyphen` or in `camelCase` notation. Example: `mouse-down`, `accordionCreate`
++ [x] M4Q Ajax: fix handler for sending data
++ [x] M4Q Ajax: fix `$.json` if returned value can't be parsed
++ [x] M4Q Ajax: fix `post` for `object`
++ [x] $: add $.serializeToArray(form), $serialize(form)
++ [x] M4Q Events: fixed `removeEventListener`
+
+##### Metro 4
++ [x] Animations: put animations to separate less/css file `metro-animations`
++ [x] Object animations: add `.flip-card`
++ [x] Object animations: add `.post-card`
++ [x] Inputs: change placeholder `font-size` to `14px`, add `text-ellipsis`
++ [x] Utils CSS: add class `.stop-pointer`
++ [x] Role naming: you can now use a hyphen to separate words in verbose component names for the data-role attribute. Example: `data-role='button-group''` and `data-role='buttongroup''` are equivalent.
++ [x] Drag Items: add new component, issue #1336
++ [x] Table: fix `viewPath` for getting `view` from server
++ [x] Table: fix colspan for message `emptyTableTitle`
++ [x] Checkbox: add using attribute `readonly`
++ [x] Switch: add using attribute `readonly`
++ [x] Table: fix `viewPath` for saving `view` on server
++ [x] Animation CSS: relocation
++ [x] AppBar: fix `app-bar-menu` behavior when user resize a window
++ [x] Slider: fix hint for IE11
++ [x] Window: fix interop m4q and jquery for `Metro.window.create()`
++ [x] Splitter: fix for IE11
++ [x] AppBar: add events `onMenuOpen`, `onMenuClose`, `onMenuExpand`, `onMenuCollapse`
+
+### 4.3.3
++ [x] m4q: upd to 1.0.3
++ [x] Toast: fix calculating toast position
++ [x] Progress: fix global setup function name
++ [x] Progress: percent value. To show set attribute `data-show-value="true"`, `data-value-position="free|center"`
++ [x] Progress: add label. Use attributes `data-show-label="true|false"`, `data-label-position="before|after"`, `data-label-template="Value is %VAL%"`
++ [x] InfoBox: fix interop with Metro 4 and jQuery
++ [x] Table: add method `clear()`, issue #1426 
++ [x] Table: fix cell data wrapping with attribute `data-cell-wrapper="true"`
++ [x] File: fix Input file inconsistent display when user cancel the choose dialog, issue #1443
++ [x] Slider: fix using accuracy with  decimal value, issue #1447  
++ [x] Calendar Picker: add attribute `data-show-week-number`
++ [x] Gravatar: fix global setup method name
++ [x] Activity: fix method `open` for undefined options
++ [x] Activity: fix interop with Metro 4 and jQuery
++ [x] Dialog: fix interop with Metro 4 and jQuery for dialog create method
++ [x] AppBar: set `max-height` for `app-bar-menu` opened with `hamburger` to visible viewport
++ [x] Buttons: refactoring - split to separate components from one file
++ [x] Calendar Picker: fix dialog mode, issue #1450
++ [x] Common CSS: add class `-disabled`
++ [x] General: Now `Metro4` init after content was loaded. If you need to switch to old init method, use `metro4:init:mode` with value `immediate`
++ [x] Double Slider: add new component, issue #1441  
++ [x] InfoButton: fix position and `display` change from `inline-flex` to `inline-block`, issue #1451
++ [x] M4Q Events: improve method `on`
++ [x] Select: fix for ie11, issue #1452
++ [x] ListView: add callback for `onNodeDblClick` event, issue #1453
++ [x] Table: add show activity when data loaded
++ [x] Table: you can set data with JS object and attribute `data-source`. Value for attribute must be a object name.
+
+### 4.3.2
++ [x] Slider: fix vertical slider marker position when slider is not visible, thx to [thinkcpu](https://github.com/thinkcpu), PR #1417
++ [x] Slider: improve events
++ [x] HotKey: extended anchor work with `data-hotkey` and attr `href`, issue #1420  
++ [x] M4Q Events:  fix `function.name` property for IE11, issue #1425
++ [x] Table: add methods `addItem([...], redraw)`, `addItems([...], redraw)`, issue #1426
++ [x] Select: attribute `data-cls-drop-list` now override default class `d-menu` if defined
++ [x] Lists: if list has class attribute, it resets with `margin: 0; padding: 0; list-style: none inside;` 
++ [x] Select: if option not has value, used option text for value
++ [x] Table: add event `onDataSaveError`
++ [x] Table: fix save view to server
++ [x] M4Q Ajax: fix creating additional headers for request, issue #1427
++ [x] Init: add meta tag `metro4:init:mode`. The value must be `immediate` or `contentloaded`, default - `immediate`. If value is `contentloaded` and meta tag `metro4:init` not equal  `false`, Metro 4 will be initiate after the content was loaded.
++ [x] Table: now you can define `decimalSeparator` and `thousandSeparator` in table head and global
++ [x] Table: add attributes `data-head` (object name, define table header), `data-body` (object name, define table data)
++ [x] Table: add attribute `data-static`. If `true`, search, pagination, info, rows count will be disabled and will not showing.
++ [x] Splitter: add method `size(str)` for change panel sizes at runtime, add observing for attribute `data-split-sizes` for change panel sizes at runtime
++ [x] Carousel: improve slide switching 
++ [x] TreeView: add trigger `change` for checkboxes
++ [x] Common: fix `h-auto-*`
+
+### 4.3.1
++ [x] Interop: fix interop with Metro4 and jQuery, issue #1408
++ [x] m4q: upd to 1.0.1
++ [x] m4q: fix initialization when `metro4` added into `head`
++ [x] Init: fix issue #1409
++ [x] Dropdown: fix interop between Metro4 and jQuery, issue #1411
++ [x] Select: fix interop between Metro4 and jQuery, issue #1412
++ [x] Panel: fix interop between Metro4 and jQuery
++ [x] Windows: fix interop between Metro4 and jQuery
++ [x] VideoPlayer: fix interop between Metro4 and jQuery
++ [x] AudioPlayer: fix interop between Metro4 and jQuery
++ [x] Hotkey: fix interop between Metro4 and jQuery
++ [x] TimePicker: fix interop between Metro4 and jQuery
++ [x] SideBar: fix interop between Metro4 and jQuery
++ [x] Charms: fix interop between Metro4 and jQuery
++ [x] Select: fix close when user click document and jQuery used
++ [x] CalendarPicker: fix interop between Metro4 and jQuery, fix close when `next[Year, Month]` clicked
++ [x] Select: add works with disabled option. You can add attr `disabled` to option to create disabled option, issue #1413
++ [x] Window: fix toggle draggable, resizeable
++ [x] Tile: fix tile width in then `tiles-grid` when tile placed in specific column
++ [x] Metro: fix observing attributes
+
+### 4.3.0
++ [x] jQuery: Goodbye!!!
++ [x] M4Q: now built in for DOM manipulation and animation
++ [x] Keypad: rename property `data-length` to `data-key-length`
++ [x] Slider: fix show/hide hint 
++ [x] Typo: fix `margin-top` for lists inside a lists, ex: `ul > ul` 
++ [x] Animation: fix `fadeIn`, `fadeOut`
++ [x] NavView: rename attribute `data-expanded` to `data-expand`
++ [x] Examples: upd `start screen`
++ [x] Calendar picker: fix using locale for initial value, issue #1376
++ [x] Typo: set line-height for paragraph to 1.5
++ [x] Table: fire event onDataLoaded before table build
++ [x] Dialog: fix hide method
++ [x] File: add method "clear"
++ [x] Source: structure refactoring
++ [x] Typography: add background to `remark` with `accent` color 
++ [x] Tests: begin tests with `cypress`
++ [x] Draggable: minor improve for `mouseMove` 
++ [x] Chat: add attribute `data-readonly` and method `toggleReadonly`
++ [x] Schemes: fix colors for table `tfoot`
++ [x] Add `checkRuntime` to components
++ [x] Table: add attributes `data-empty-table-title`, `data-cls-empty-table-title` for issue #1403
++ [x] Table: fix padding for sortable columns
++ [x] Add `destroy` method to components. This method remove all event handlers and return core element
++ [x] Select: add props `data-add-empty-value` (default: false), `data-empty-value` (default: empty string)
++ [x] Select: add prop `data-placeholder`
++ [x] Select: add prop `data-clear-button` (default: false)
++ [x] Grid: optimise styles
++ [x] Hint: fix remove on leave element
++ [x] TreeView: add attribute `data-show-child-count`
+
+### 4.2.49
++ [x] Select: extended to interop with role=dropdown
++ [x] Docs: upd docs for cards, add `icon-box`, `more-info-box`, `skill-box`, `social-box`
++ [x] Sidebar: fix setup global function name
++ [x] Textarea: fix issue #1400
++ [x] MaterialTabs: fix issue #1402 
++ [x] MaterialTabs: add method `open(tab_num)` for issue #1399
++ [x] Select: fix input autofocus when dropdown
++ [x] Textarea: fix resize when component was created
++ [x] File: fix firing `change` event on Safari
+
+### 4.2.48
++ [x] Select: fix error when using with pair to Select from Metro 4 for React
++ [x] Carousel: moved style props for slide background image from js to css
++ [x] Input: add attribute `data-exclaim` for defining exclamation symbol
++ [x] Input: fix no display clear button when input is readOnly 
++ [x] Textarea: fix no display clear button when input is readOnly 
+ 
+### 4.2.47
++ [x] Input: fix triggering `change` event, add trigger event `clear` when clear button is pressed
++ [x] Accordion: fixed glitch for frames who must be closed, but initiated as open 
+
+### 4.2.46
++ [x] Table: fixed format value for sorting when value is empty, null or undefined
++ [x] Dropdown: fix set open on init
++ [x] DatePicker: add observation for attribute `data-locale` 
++ [x] DatePicker: add observation for attribute `data-format`
++ [x] Utils: upd func `isLocalhost`
++ [x] Windows: fix make runtime   
++ [x] Dialog: fix make runtime   
++ [x] InfoBox: fix make runtime
++ [x] Validator: fix validating for `integer` and `float` rules, issue #1388 
++ [x] Builder: fix builder `config`  
++ [x] Embed objects: set default width and height to `100%`
+
 ### 4.2.45
 + [x] Calendar picker: fix initial value for i18n
 + [x] Typography: set `line-height: 1.5` for `p` 
 + [x] Examples: fix desktop demo
 + [x] Examples: fix start screen demo
++ [x] Notify system: fix minor bug for creating notify after setup
 
 ### 4.2.44
 + [x] Calendar: fix methods `setMaxDate`, `setMinDate`, issue #1374
 + [x] Datepicker: fix offset for timezones, issue #1372
 + [x] Datepicker: fix `val()` method 
-+ [x] Notify system: fix minor bug for creating notify after setup
 
 ### 4.2.43
 + [x] Inputs: add class `.input-small` for using with `input`, `select`, `spinner`, `tag-input`, `keypad`, `file` , issue #1245
